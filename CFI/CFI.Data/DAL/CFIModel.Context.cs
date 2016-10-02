@@ -16,7 +16,7 @@ namespace CFI.Data.DAL
     public partial class CFIEntities : DbContext
     {
         public CFIEntities()
-            : base("name=CFIEntities")
+            : base("name=DefaultConnection")
         {
         }
     
