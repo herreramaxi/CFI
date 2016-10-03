@@ -398,6 +398,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610030051229_Initial.cs" />
+    <Compile Include="Migrations\201610030051229_Initial.Designer.cs">
+      <DependentUpon>201610030051229_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610030055491_SkillsTableIsAdded.cs" />
+    <Compile Include="Migrations\201610030055491_SkillsTableIsAdded.Designer.cs">
+      <DependentUpon>201610030055491_SkillsTableIsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -482,6 +491,14 @@
       <Project>{01ae6e1f-7ada-4eb6-9ecd-31ffbecaa6ef}</Project>
       <Name>CFI.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610030051229_Initial.resx">
+      <DependentUpon>201610030051229_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610030055491_SkillsTableIsAdded.resx">
+      <DependentUpon>201610030055491_SkillsTableIsAdded.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

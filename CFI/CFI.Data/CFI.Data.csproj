@@ -88,6 +88,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CFIModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="DAL\CFIModel.edmx.diagram">
       <DependentUpon>CFIModel.edmx</DependentUpon>
     </None>
