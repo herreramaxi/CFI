@@ -8,6 +8,8 @@ namespace CFI.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        public ICollection<Skills> Skills { get; set; }
     }
 
     public class ExternalLoginListViewModel

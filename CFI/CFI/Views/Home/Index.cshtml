@@ -2,3 +2,67 @@
     ViewBag.Title = "CFI";
 }
 
+<div class="category-container">
+    @*<select multiple id="category" data-role="tagsinput" class="typeahead" />*@
+    <input type="text" id="category" data-role="tagsinput" class="typeahead" style="display" />
+    
+    @*<input id="category"   class="typeahead" type="text" placeholder="Skills">*@
+    <!--$('.category-container').val()
+    $('.category-container').tagsinput('items')-->
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Content/css")
+    @Scripts.Render("~/Content/typeaheadcss")
+
+    @Scripts.Render("~/bundles/typeahead")*@
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<link rel="stylesheet" type="text/css" href="https://fiddle.jshell.net/css/normalize.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://fiddle.jshell.net/css/result-light.css">
+<script type="text/javascript" src="https://rawgit.com/TimSchlechter/bootstrap-tagsinput/master/src/bootstrap-tagsinput.js"></script>
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/timschlechter/bootstrap-tagsinput/master/src/bootstrap-tagsinput.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            SetupTipeahead();
+        });
+        function SetupTipeahead() {
+            var engine = new Bloodhound({
+                remote: {
+                    url: '/Account/GetSkills?query=%QUERY',
+                    ajax: {
+                        type: 'GET'
+                    },
+                    wildcard: '%QUERY',
+                    filter: function (skills) {
+                        return $.map(skills.results, function (skill) {
+                            return {
+                                value: skill.Description,
+                                id: skill.id
+                            };
+                        });
+                    }
+                },
+                datumTokenizer: function (d) {
+                    return Bloodhound.tokenizers.whitespace(d.FullName);
+                },
+                queryTokenizer: Bloodhound.tokenizers.whitespace
+            });
+
+            engine.initialize();
+
+            $('#category').typeahead(null, {
+                displayKey: 'value',
+                source: engine.ttAdapter()
+            });
+        }
+    </script>
+}
+
+

@@ -25,12 +25,99 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.Skills, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <div id="default-suggestions">
+                <input class="typeahead" id="category" type="text" placeholder="Categories" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Register" />
+            <input id="btn" type="button" value="Press" onclick="AjaxTest()" />
+
         </div>
     </div>
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/typeahead")*@
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://fiddle.jshell.net/css/normalize.css" />
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fiddle.jshell.net/css/result-light.css" />
+    <script type="text/javascript" src="https://rawgit.com/TimSchlechter/bootstrap-tagsinput/master/src/bootstrap-tagsinput.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/timschlechter/bootstrap-tagsinput/master/src/bootstrap-tagsinput.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js"></script>
+
+    <script type="text/javascript">
+
+        function AjaxTest() {
+            var dataValue = { "query": $('#inputText').val() };
+
+
+            $.ajax({
+                type: "GET",
+                url: '/Account/GetSkills?query=%QUERY',
+                data: "value",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+
+                success: function (data) {
+                    alert("I think it worked.");
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    alert("Sorry!!! ");  // Insert breakpoint here
+                }
+            });
+        }
+
+        $(function () {
+            SetupTypeahead();
+        });
+
+        function SetupTypeahead() {
+            var engine = new Bloodhound({
+                datumTokenizer: function (d) {
+                    return Bloodhound.tokenizers.whitespace(d.Description)
+                },
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/Account/GetSkills?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            engine.initialize();
+
+            $('#default-suggestions .typeahead').tagsinput({
+                typeaheadjs: [{
+                    minLength: 1,
+                    highlight: true,
+                }, {
+                    // minlength: 2,
+                    limit: 5,
+                    name: 'engine',
+                    displayKey: 'Description',
+                    valueKey: 'Description',
+                    source: engine.ttAdapter(),
+                    // display:
+                    templates: {
+                        header: '<h4>Skills</h4><hr>',
+                        //footer: '<h4>Footer</h4>',
+                        //suggestion:
+                        //   function (c) { return '<img src="' + c.ImageUrl + '" width="25px" style="display: inline" />' + '<span style="display: inline">' + c.Name + '</span>'; }
+
+                    }
+                }],
+                freeInput: false
+            });
+
+        }
+    </script>
 }
+
+

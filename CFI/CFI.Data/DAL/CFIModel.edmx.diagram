@@ -13,6 +13,8 @@
         <AssociationConnector Association="CFIModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="CFIModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="CFIModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CFIModel.Skills" Width="1.5" PointX="5.75" PointY="6.75" />
+        <AssociationConnector Association="CFIModel.ApplicationUserSkills" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

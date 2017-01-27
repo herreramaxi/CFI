@@ -81,6 +81,9 @@
     <Compile Include="DAL\C__MigrationHistory.cs">
       <DependentUpon>CFIModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Skills.cs">
+      <DependentUpon>CFIModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
