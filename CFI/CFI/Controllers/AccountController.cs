@@ -424,6 +424,7 @@ namespace CFI.Controllers
             base.Dispose(disposing);
         }
 
+        //TODO: Deny Anonymous users
         [AllowAnonymous]
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult GetSkills(string query)
